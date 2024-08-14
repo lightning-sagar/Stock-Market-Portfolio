@@ -40,3 +40,8 @@ export const onSubmitResponseAtom = atom({
         response: false
     }
 })
+
+export const userAtom = atom({
+    key:'userAtom',
+    default:JSON.parse(localStorage.getItem('user-data'))
+})

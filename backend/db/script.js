@@ -4,10 +4,10 @@ require("dotenv").config();
 const connectionString = process.env.DATABASE_URL;
 const databaseName = "stock-market-portfolio";
 
-mongoose.connect(`${connectionString}/${databaseName}`).then(()=>{
+mongoose.connect(process.env.DATABASE_URL).then(()=>{
     console.log("Database Connected Successfully");
-}).catch(()=>{
-    console.log("Database Connection Failed");
+}).catch((err)=>{
+    console.log("Database Connection Failed",err);
 });
 
 const userSchema = new mongoose.Schema({
