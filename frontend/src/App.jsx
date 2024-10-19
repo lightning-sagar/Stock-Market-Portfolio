@@ -3,8 +3,6 @@ import React, { Suspense } from "react";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { userAtom } from './store/atom.js';
-
 const SignIn = React.lazy(() => import("./components/Sign/SignIn.jsx"));
 const SignUp = React.lazy(() => import("./components/Sign/SignUp.jsx"));
 const Home = React.lazy(() => import("./components/Home/Home.jsx"));
@@ -14,7 +12,9 @@ const UpdateStock = React.lazy(() => import("./components/UpdateStock/UpdateStoc
 const DeleteStock = React.lazy(() => import("./components/DeleteStock/DeleteStock.jsx"));
 
 function App() {
-    const user = useRecoilValue(userAtom);
+    //will check if there is usergmail in local storage
+    
+    const user = localStorage.getItem("userEmail") || null ;
     return (
         <BrowserRouter>
             <Navbar />

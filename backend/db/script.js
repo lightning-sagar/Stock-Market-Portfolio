@@ -4,7 +4,7 @@ require("dotenv").config();
 const connectionString = process.env.DATABASE_URL;
 const databaseName = "stock-market-portfolio";
 
-mongoose.connect(process.env.DATABASE_URL).then(()=>{
+mongoose.connect(`${connectionString}/${databaseName}`).then(()=>{
     console.log("Database Connected Successfully");
 }).catch((err)=>{
     console.log("Database Connection Failed",err);

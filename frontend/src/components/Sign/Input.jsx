@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { signDetailsAtom } from "../../store/atom.js";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { validateEmail } from '../../utils/RegexValidation.js';
 
 export default function Input() {
     const [email, setEmail] = useState("");
@@ -16,20 +17,13 @@ export default function Input() {
         } else {
             setEmailError("");
         }
-        if (password && password.length < 3) {
+        if (password && password.length < 6) {
             setPasswordError("Password must be at least 6 characters");
-        }
-        else {
+        } else {
             setPasswordError("");
         }
         setSignDetails({ email: email, password: password });
     }, [email, password, setSignDetails]);
-    // Updated email validation function
-    const validateEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.(com|in)$/;
-        return emailRegex.test(email);
-    };
-
     return (
         <div className="input-box">
             <input

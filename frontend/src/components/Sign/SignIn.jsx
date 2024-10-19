@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import Input from "./Input.jsx";
-import { signDetailsAtom, userAtom, userSignedInAtom } from "../../store/atom.js";
+import { signDetailsAtom, userSignedInAtom } from "../../store/atom.js";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import PopupComponent from "../PopupComponent/PopupComponent.jsx";
@@ -12,7 +12,6 @@ export default function SignIn() {
 
     const signInDetails = useRecoilValue(signDetailsAtom);
     const setUserSignedIn = useSetRecoilState(userSignedInAtom);
-    const setUser = useSetRecoilState(userAtom);
     const [signInData, setSignInData] = useState("");
 
     const signin = useCallback(async () => {
@@ -25,8 +24,6 @@ export default function SignIn() {
             localStorage.setItem("authorization", response.data.token);
             localStorage.setItem("userEmail", signInDetails.email);
             //add user to local storage + set user
-            localStorage.setItem("user-data", response.data.msg);
-            setUser(response.data.msg);
             setUserSignedIn(true);
             navigate("/"); 
         } catch (err) {

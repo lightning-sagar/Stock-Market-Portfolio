@@ -2,7 +2,7 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import Input from "./Input.jsx";
 import UsernameInput from "./UsernameInput.jsx"
 import './sign.css'
-import {signDetailsAtom, userAtom, usernameDetailsAtom} from "../../store/atom.js";
+import {signDetailsAtom, usernameDetailsAtom} from "../../store/atom.js";
 import axios from "axios";
 import {useCallback, useState} from "react";
 import PopupComponent from "../PopupComponent/PopupComponent.jsx";
@@ -13,7 +13,6 @@ export default function SignUp(){
     const usernameDetails = useRecoilValue(usernameDetailsAtom);
     const [loading, setLoading] = useState(false);
     const [signUpData, setSignUpData] = useState("");
-    const setUser = useRecoilState(userAtom);
 
     const signup = useCallback(async ()=>{
         setLoading(true);
@@ -27,13 +26,10 @@ export default function SignUp(){
                 email: signUpDetails.email,
                 password: signUpDetails.password
             });
-            localStorage.setItem('user-data',JSON.stringify(response.data.msg))
             localStorage.setItem("userEmail", signUpDetails.email);
-            setUser(data);
             setSignUpData(response.data.msg);
-            
         } catch(err) {
-            setSignUpData(err.response.data.msg);
+            setSignUpData(err.response.data);
         }
         setLoading(false);
         window.location.reload();
